@@ -125,3 +125,8 @@ export const deleteOneM = async (id) => {
         return console.log("Данные не удалены: ", error)
     })
 }
+
+export const getAllStudentMarks = async (studedntId) => {
+    const { data } = await $host.get('api/mark//studentMarks/' + studedntId)
+    return data
+}
