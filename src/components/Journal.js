@@ -22,6 +22,8 @@ const columns = (handleInputChange, routing, handleIconClick) => [
         render: (text, record) => <a
          onClick={() => routing(record.id)}
          >{text}</a>,
+         onFilter: (text, record) => record.name.indexOf(text) === 0,
+        sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
         title: 'Отметка',
@@ -121,16 +123,8 @@ const Journal = observer(() => {
 
     
     const recordIn = () => {
-
-        alert("Попытка")
-        console.log(student.selectedMark, "mark")
-        console.log(student.selectedDate, "date")
-        console.log(student.selectedInfo, "info")
-        console.log(student.selectedId, "stud")
-        console.log(student.selectedDiscipline.id, "disc")
         if(student.selectedMark != null & student.selectedDate != null & student.selectedInfo != null & student.selectedId != null & student.selectedDiscipline.id != null){
             addMark()
-            alert("Успешно")
         }else{
             return alert('Данные не заполнены')
         }
@@ -146,15 +140,10 @@ const Journal = observer(() => {
                             key: index,
                             id: student.id,
                             name: student.name,
-                            //info: 'n/a',
                             editable: true
                         };
                     })
             } />
-        {/* <Button
-        >
-            Сохранить все
-            </Button> */}
     </>
 })
 

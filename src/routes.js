@@ -3,12 +3,12 @@ import AdminStudent from "./pages/AdminStudent"
 import AdminGroup from "./pages/AdminGroup"
 import AdminSpec from "./pages/AdminSpec"
 import AdminDiscipline from "./pages/AdminDiscipline"
-
+import AdminMark from "./pages/AdminMark"
 import Auth from "./pages/Auth"
 import Pad from "./pages/Pad"
 import StudentPage from "./pages/StudentPage"
 import Tab from "./pages/Tab"
-import { ADMIN_ROUTE, PAD_ROUTE, STUDENT_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, MAIN_ROUTE, ADMIN_STUDENT, ADMIN_DISCIPLINE, ADMIN_GROUP, ADMIN_SPEC, ADMIN_TEACHER } from "./utils/consts"
+import { ADMIN_ROUTE, PAD_ROUTE, STUDENT_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, MAIN_ROUTE, ADMIN_STUDENT, ADMIN_DISCIPLINE, ADMIN_GROUP, ADMIN_SPEC, ADMIN_TEACHER, ADMIN_MARK } from "./utils/consts"
 import AdminTeacher from "./pages/AdminTeacher"
 
 export const authRoutes = [
@@ -35,6 +35,10 @@ export const authRoutes = [
     {
         path: ADMIN_TEACHER,
         Component: AdminTeacher
+    },
+    {
+        path: ADMIN_MARK,
+        Component: AdminMark
     },
 
     {

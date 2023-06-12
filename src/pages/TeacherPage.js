@@ -59,7 +59,7 @@ const StudentPage = observer(() => {
         <Col md={8}>
           <Container style={{ height: '90vh', backgroundColor: 'rgb(197, 179, 210)', borderRadius: '25px', marginBottom: '10px' }}>
             <Row style={{ marginBottom: '30px' }}>
-              <h4 style={{ marginTop: '10px' }}>Статистика студента:</h4>
+              <h4 style={{ marginTop: '10px' }}>Статистика преподавателя:</h4>
               <hr></hr>
               <Container style={{ width: '90%', backgroundColor: 'rgb(172, 149, 189)', borderRadius: '25px' }}>
                 <h3 style={{ textAlign: 'center', width: '100%', marginTop: '10px' }}>{student.name}</h3>

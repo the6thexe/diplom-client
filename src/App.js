@@ -20,6 +20,7 @@ const App = observer(() => {
       }).finally(() => setLoading(false))
     }, 1000)
   }, [])
+  console.log(user.role)
 
   if (loading) {
     return <>

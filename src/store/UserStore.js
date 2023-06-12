@@ -5,6 +5,7 @@ export default class UserStore {
         this._isAuth = false
         this._isOpenBar = false
         this._user = {}
+        this._role = 'admin'
         makeAutoObservable(this)
     }
 
@@ -25,5 +26,13 @@ export default class UserStore {
 
     get user() {
         return this._user
+    }
+
+    setRole(role) {
+        this._role = role
+    }
+
+    get role() {
+        return this._role
     }
 }

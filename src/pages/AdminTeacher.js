@@ -13,13 +13,14 @@ const AdminTeacher = () => {
         <TeacherTable />
       </Col>
       <Col md={2}>
+      <hr></hr>
         <Button
           variant={"outline-dark"}
-          className="mt-4"
           onClick={() => setTeacherVisible(true)}
         >
           Добавить преподавателя
         </Button>
+        <hr></hr>
         <CreateTeacher show={teacherVisible} onHide={() => setTeacherVisible(false)} />
       </Col>
       <Col md={1}>

@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react'
-import { Modal,} from "react-bootstrap"
+import { Modal, } from "react-bootstrap"
 import { Button, Form } from "react-bootstrap"
 import { Context } from "../../index"
-import { createTeacher} from '../../http/padAPI'
+import { createTeacher } from '../../http/padAPI'
 import { observer } from 'mobx-react-lite'
+import { registration } from '../../http/userAPI'
 
 const CreateTeacher = observer(({ show, onHide }) => {
     const { student } = useContext(Context)
@@ -19,6 +20,16 @@ const CreateTeacher = observer(({ show, onHide }) => {
         formData.append('login', login)
         formData.append('password', password)
         createTeacher(formData).then(data => onHide())
+        click();
+    }
+
+    const click = async () => {
+        try {
+            let data;
+            data = await registration(login, password, 'teacher')
+        } catch (e) {
+            alert(e.response.data.message)
+        }
     }
 
     return (

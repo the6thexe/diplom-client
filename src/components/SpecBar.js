@@ -1,13 +1,17 @@
 import { observer } from 'mobx-react-lite'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Form, Card, Dropdown } from 'react-bootstrap';
 import { Context } from '../index';
 import DropdownToggle from 'react-bootstrap/esm/DropdownToggle';
 import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+import { fetchSpecs } from '../http/padAPI';
 
 const SpecBar = observer(() => {
     const { student } = useContext(Context)
+    useEffect(() => {
+        fetchSpecs().then(data => student.setSpecs(data))
+    }, [])
     return (
         <Form className="d-flex">
             <Dropdown>

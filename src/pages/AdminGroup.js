@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Col, Row } from 'react-bootstrap'
 import GroupTable from '../components/tables/GroupTable'
 import CreateGroup from '../components/modals/CreateGroup'
+import SpecBar from '../components/SpecBar'
 
 const AdminGroup = () => {
   const [groupVisible, setGroupVisible] = useState(false)
@@ -13,13 +14,16 @@ const AdminGroup = () => {
         <GroupTable />
       </Col>
       <Col md={2}>
+      <hr></hr>
+      <SpecBar></SpecBar>
+      <hr></hr>
         <Button
           variant={"outline-dark"}
-          className="mt-4"
           onClick={() => setGroupVisible(true)}
         >
           Добавить группу
         </Button>
+        <hr></hr>
         <CreateGroup show={groupVisible} onHide={() => setGroupVisible(false)} />
       </Col>
       <Col md={1}>

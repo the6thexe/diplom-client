@@ -7,13 +7,13 @@ import { observer } from 'mobx-react-lite';
 
 const columns = (handleIconClick) => [
     {
-        title: 'Номер предмета',
+        title: 'Номер учебного предмета',
         dataIndex: 'id',
         key: 'id',
         render: (text) => <a >{text}</a>,
     },
     {
-        title: 'Название предммета',
+        title: 'Название учебного предмета',
         dataIndex: 'name',
         key: 'name',
         render: (text) => <a >{text}</a>,
@@ -39,13 +39,12 @@ const DisciplineTable = observer(() => {
     const handleIconClick = async (record) => {
         await deleteOneDiscipline(record)
     };
-
     const { student } = new useContext(Context)
     useEffect(() => {
         const fetchData = async () => {
             await fetchDisciplines().then(data => student.setDisciplines(data));
-            
-            setData(student.disciplines.map((discipline, index) => {
+            setData(student.disciplines.filter((disciplines) => disciplines.groupId === student.selectedGroup.id)
+                .map((discipline, index) => { 
                 return {
                     key: index,
                     id: discipline.id,

@@ -3,9 +3,11 @@ import { useContext, useEffect, useState } from 'react';
 import { Context } from '../../index'
 import { deleteOneStudent, fetchDisciplines, fetchGroups, fetchStudents } from '../../http/padAPI';
 import { observer } from 'mobx-react-lite';
+import { useNavigate } from 'react-router-dom';
+import { STUDENT_ROUTE } from '../../utils/consts';
 
 
-const columns = (handleIconClick) => [
+const columns = (handleIconClick, routing) => [
     {
         title: 'Номер Зачетки',
         dataIndex: 'id',
@@ -16,13 +18,11 @@ const columns = (handleIconClick) => [
         title: 'ФИО',
         dataIndex: 'name',
         key: 'name',
-        render: (text) => <a >{text}</a>,
-    },
-    {
-        title: 'Группа',
-        dataIndex: 'groupId',
-        key: 'groupId',
-        render: (text) => <a >{text}</a>,
+        render: (text, record) => <a 
+        onClick={() => routing(record.id)}
+        >{text}</a>,
+        onFilter: (text, record) => record.name.indexOf(text) === 0,
+        sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
         title: 'Удалить',
@@ -41,17 +41,23 @@ const columns = (handleIconClick) => [
 
 const StudentTable = observer(() => {
     const [data, setData] = useState([]);
+    const history = new useNavigate()
 
     const handleIconClick = async (record) => {
         await deleteOneStudent(record)
     };
+
+    const routing = (id) => {
+        history(STUDENT_ROUTE + "/" + id)
+    }
 
     const { student } = new useContext(Context)
     useEffect(() => {
         const fetchData = async () => {
             await fetchStudents().then(data => student.setStudents(data));
             
-            setData(student.students.map((student, index) => {
+            setData(student.students.filter((students) => students.groupId === student.selectedGroup.id)
+                .map((student, index) => {
                 return {
                     key: index,
                     id: student.id,
@@ -65,7 +71,7 @@ const StudentTable = observer(() => {
     }, [student.students]);
 
     return <>
-        <Table columns={columns(handleIconClick)} dataSource={data} />
+        <Table columns={columns(handleIconClick, routing)} dataSource={data} />
     </>
 })
 

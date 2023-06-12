@@ -22,7 +22,7 @@ const NavBar = observer(() => {
         <Navbar style={{ marginBottom: '10px', height: "55px", backgroundColor: 'rgba(97, 48, 135, 1)' }} /*bg="dark"*/ variant="dark">
             <Offcanvas />
             <Container>
-                <NavLink className="ms-auto" style={{ font: 'Jomhuria', color: 'white' }} to={MAIN_ROUTE}>{user._isOpenBar ? "WISP" : "Writer Inner System Pannel"}</NavLink>
+                <NavLink className="ms-auto" style={{ font: 'Jomhuria', color: 'white' }} to={MAIN_ROUTE}>{user._isOpenBar ? "WISP" : "Writer Inner System Panel"}</NavLink>
             </Container >
         </Navbar>
 

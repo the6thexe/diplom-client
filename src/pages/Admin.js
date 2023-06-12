@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, Container } from 'react-bootstrap'
 import CreateSpec from '../components/modals/CreateSpec'
 import { useNavigate } from 'react-router-dom'
-import { ADMIN_DISCIPLINE, ADMIN_GROUP, ADMIN_SPEC, ADMIN_STUDENT, ADMIN_TEACHER } from '../utils/consts'
+import { ADMIN_DISCIPLINE, ADMIN_GROUP, ADMIN_MARK, ADMIN_SPEC, ADMIN_STUDENT, ADMIN_TEACHER } from '../utils/consts'
 
 
 const Admin = () => {
@@ -43,7 +43,14 @@ const Admin = () => {
         className="mt-4"
         onClick={() => history(ADMIN_DISCIPLINE)}
       >
-        Дисциплины
+        Предметы
+      </Button>
+      <Button
+        variant={"outline-dark"}
+        className="mt-4"
+        onClick={() => history(ADMIN_MARK)}
+      >
+        Отметки
       </Button>
     </Container>
   )

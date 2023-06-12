@@ -4,6 +4,7 @@ import DisciplineTable from '../components/tables/DisciplineTable'
 import { Context } from '../index'
 import { fetchDisciplines } from '../http/padAPI'
 import CreateDiscipline from '../components/modals/CreateDiscipline'
+import GroupBar from '../components/GroupBar'
 
 
 
@@ -16,16 +17,19 @@ const AdminDiscipline = () => {
       <Col md={1}>
       </Col>
       <Col md={8}>
-        <DisciplineTable />
+        <DisciplineTable/>
       </Col>
       <Col md={2}>
+      <hr></hr>
+      <GroupBar/>
+      <hr></hr>
         <Button
           variant={"outline-dark"}
-          className="mt-4"
           onClick={() => setDisciplineVisible(true)}
         >
-          Добавить дисциплину
+          Добавить учебный предмет
         </Button>
+        <hr></hr>
         <CreateDiscipline show={disceplineVisible} onHide={() => setDisciplineVisible(false)} />
       </Col>
       <Col md={1}>

@@ -45,7 +45,8 @@ const GroupTable = observer(() => {
         const fetchData = async () => {
             await fetchGroups().then(data => student.setGroups(data));
             
-            setData(student.groups.map((group, index) => {
+            setData(student.groups.filter((groups) => groups.specId === student.selectedSpec.id)
+                .map((group, index) => {
                 return {
                     key: index,
                     id: group.id,

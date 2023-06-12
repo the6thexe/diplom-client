@@ -27,3 +27,10 @@
     border-bottom: 10px solid #a288b6;
     transition: background 0.2s ease;
 }
+
+:where(.css-dev-only-do-not-override-dfjnss).ant-table-wrapper td.ant-table-column-sort {
+    background: #d9c5e9;
+}
+:where(.css-dev-only-do-not-override-dfjnss).ant-table-wrapper .ant-table-thead th.ant-table-column-sort {
+    background: rgb(188, 153, 216);
+}

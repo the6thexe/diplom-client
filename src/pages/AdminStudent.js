@@ -3,6 +3,8 @@ import StudentTable from '../components/tables/StudentTable'
 import { Button, Col, Row } from 'react-bootstrap'
 import CreateStudent from '../components/modals/CreateStudent'
 import { observer } from 'mobx-react-lite'
+import '../css/table.css'
+import GroupBar from '../components/GroupBar'
 
 const AdminStudent = observer(() => {
   const [studentVisible, setStudentVisible] = useState(false)
@@ -14,10 +16,11 @@ const AdminStudent = observer(() => {
         <StudentTable/>
       </Col>
       <Col md={2}>
+       <hr></hr>
+        <GroupBar/>
         <hr></hr>
         <Button
           variant={"outline-dark"}
-          className="mt-4"
           onClick={() => setStudentVisible(true)}
         >
           Добавить студента
@@ -25,7 +28,6 @@ const AdminStudent = observer(() => {
           <hr>
           </hr>
         <CreateStudent show={studentVisible} onHide={() => setStudentVisible(false)} />
-        <hr></hr>
       </Col>
       <Col md={1}>
       </Col>
