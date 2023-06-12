@@ -50,6 +50,7 @@ export default class StudentStore {
         this._selectedMark = {}
         this._selectedInfo = {}
         this._selectedId = {}
+        this._selectedTeacher = {}
         makeAutoObservable(this)
     }
 
@@ -111,6 +112,12 @@ export default class StudentStore {
     }
     get teachers() {
         return this._teachers
+    }
+    setSelectedTeacher(teacher) {
+        this._selectedTeacher = teacher
+    }
+    get selectedTeacher () {
+        return this._selectedTeacher
     }
 
     setMs(ms) {

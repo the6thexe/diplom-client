@@ -3,8 +3,9 @@ import { Button, Col, Row } from 'react-bootstrap'
 import GroupTable from '../components/tables/GroupTable'
 import CreateGroup from '../components/modals/CreateGroup'
 import SpecBar from '../components/SpecBar'
+import { observer } from 'mobx-react-lite'
 
-const AdminGroup = () => {
+const AdminGroup = observer(() => {
   const [groupVisible, setGroupVisible] = useState(false)
   return (
     <Row>
@@ -30,6 +31,6 @@ const AdminGroup = () => {
       </Col>
     </Row>
   )
-}
+})
 
 export default AdminGroup

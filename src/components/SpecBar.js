@@ -16,7 +16,7 @@ const SpecBar = observer(() => {
         <Form className="d-flex">
             <Dropdown>
                 <DropdownToggle variant={"outline-dark"}>
-                    Специальность
+                    {student.selectedSpec.name || 'Специальность'}
                 </DropdownToggle>
                 <DropdownMenu>
                     {student.specs.map(spec =>

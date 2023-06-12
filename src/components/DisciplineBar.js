@@ -22,7 +22,7 @@ const DisciplineBar = observer(() => {
                 <DropdownMenu>
                     {student.disciplines.map(discipline =>
                         <DropdownItem
-                            active={discipline.id === student.selectedDiscipline.id}
+                            active={discipline.id === student.setSelectedDiscipline.id}
                             onClick={() => student.setSelectedDiscipline(discipline)}
                             key={discipline.id}>
                             {discipline.name}

@@ -21,8 +21,8 @@ export const deleteOneSpec = async (id) => {
     })
 }
 
-export const createDiscipline = async (discepline) => {
-    const { data } = await $authHost.post('api/discipline', discepline)
+export const createDiscipline = async (discipline) => {
+    const { data } = await $authHost.post('api/discipline', discipline)
     return data
 }
 

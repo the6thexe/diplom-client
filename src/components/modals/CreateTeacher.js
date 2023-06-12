@@ -9,27 +9,15 @@ import { registration } from '../../http/userAPI'
 const CreateTeacher = observer(({ show, onHide }) => {
     const { student } = useContext(Context)
     const [name, setName] = useState('')
-    const [phone, setPhone] = useState(0)
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
 
     const addTeacher = () => {
         const formData = new FormData()
         formData.append('name', name)
-        formData.append('phone', `${phone}`)
         formData.append('login', login)
         formData.append('password', password)
         createTeacher(formData).then(data => onHide())
-        click();
-    }
-
-    const click = async () => {
-        try {
-            let data;
-            data = await registration(login, password, 'teacher')
-        } catch (e) {
-            alert(e.response.data.message)
-        }
     }
 
     return (
@@ -41,7 +29,7 @@ const CreateTeacher = observer(({ show, onHide }) => {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Добавить Учителя
+                    Добавить преподавателя
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -52,12 +40,6 @@ const CreateTeacher = observer(({ show, onHide }) => {
                         className="mt-3 md-3"
                         placeholder="Введите Имя"
                     />
-                    {/* <Form.Control
-                        value={phone}
-                        onChange={e => setPhone(Number(e.target.value))}
-                        className="mt-3 md-3"
-                        placeholder="Введите номер телефона"
-                    /> */}
                     <Form.Control
                         value={login}
                         onChange={e => setLogin(e.target.value)}
@@ -73,7 +55,7 @@ const CreateTeacher = observer(({ show, onHide }) => {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="outline-success" onClick={addTeacher}>Добавить студента</Button>
+                <Button variant="outline-success" onClick={addTeacher}>Добавить преподавателя</Button>
                 <Button variant="outline-danger" onClick={onHide}>Отмена</Button>
             </Modal.Footer>
         </Modal>

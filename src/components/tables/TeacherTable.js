@@ -18,7 +18,7 @@ const columns = (handleIconClick) => [
         key: 'name',
         render: (text) => <a >{text}</a>,
     },
-    {
+    /*{
         title: 'Логин для входа',
         dataIndex: 'login',
         key: 'login',
@@ -29,7 +29,7 @@ const columns = (handleIconClick) => [
         dataIndex: 'password',
         key: 'password',
         render: (text) => <a >{text}</a>,
-    },
+    },*/
     {
         title: 'Удалить',
         dataIndex: 'actions',
@@ -62,8 +62,8 @@ const TeacherTable = observer(() => {
                     key: index,
                     id: teacher.id,
                     name: teacher.name,
-                    login: teacher.login,
-                    password: teacher.password,
+                    //login: teacher.login,
+                    //password: teacher.password,
                     editable: true
                 };
             }));

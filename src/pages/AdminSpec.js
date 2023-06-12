@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { Button, Col, Row } from 'react-bootstrap'
 import SpecTable from '../components/tables/SpecTable'
 import CreateSpec from '../components/modals/CreateSpec'
+import { observer } from 'mobx-react-lite'
 
-const AdminSpec = () => {
+const AdminSpec = observer(() => {
   const [specVisible, setSpecVisible] = useState(false)
   return (
     <Row>
@@ -26,6 +27,6 @@ const AdminSpec = () => {
       </Col>
     </Row>
   )
-}
+})
 
 export default AdminSpec
