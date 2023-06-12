@@ -81,13 +81,13 @@ const StudentPage = observer(() => {
             </Row>
             <hr></hr>
             <Row>
-              <Col style={{ marginRight: '37px', marginLeft: '37px', backgroundColor: 'rgb(172, 149, 189)', borderRadius: '25px', marginTop: '10px' }}>
+              {/* <Col style={{ marginRight: '37px', marginLeft: '37px', backgroundColor: 'rgb(172, 149, 189)', borderRadius: '25px', marginTop: '10px' }}>
                 <h5 style={{ marginTop: '10px' }}>
                   Посещаемость:
                 </h5>
                 <hr></hr>
-              </Col>
-              <Col style={{ marginRight: '37px', backgroundColor: 'rgb(172, 149, 189)', borderRadius: '25px', marginTop: '10px' }}>
+              </Col> */}
+              <Col style={{ marginRight: '20px',marginLeft: "20px", backgroundColor: 'rgb(172, 149, 189)', borderRadius: '25px', marginTop: '10px' }}>
                 <h5 style={{ marginTop: '10px' }}>
                   Средний балл:
                 </h5>

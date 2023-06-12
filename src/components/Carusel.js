@@ -9,7 +9,7 @@ function ControlledCarousel() {
   };
 
   return (
-    <Carousel style={{width: '1300px', height: '960px', marginLeft: '0px'}} activeIndex={index} onSelect={handleSelect}>
+    <Carousel style={{width: '1250px', height: '960px', marginLeft: '0px'}} activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item>
         <img
           className="d-block w-100"
