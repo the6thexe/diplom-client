@@ -8,7 +8,7 @@ import { check } from "./http/userAPI";
 import { Spinner, Button } from "react-bootstrap";
 import Offcanvas from "./components/Offcanvas";
 
-const App = observer(() => {
+const App = () => {
   const { user } = useContext(Context)
   const [loading, setLoading] = useState(true)
 
@@ -54,6 +54,6 @@ const App = observer(() => {
       <AppRouter />
     </BrowserRouter>
   );
-});
+};
 
 export default App;
