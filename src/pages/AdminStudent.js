@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite'
 import '../css/table.css'
 import GroupBar from '../components/GroupBar'
 
-const AdminStudent = observer(() => {
+const AdminStudent = () => {
   const [studentVisible, setStudentVisible] = useState(false)
   return (
     <Row>
@@ -33,6 +33,6 @@ const AdminStudent = observer(() => {
       </Col>
     </Row>
   )
-})
+}
 
 export default AdminStudent

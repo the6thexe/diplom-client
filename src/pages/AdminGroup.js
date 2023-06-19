@@ -5,7 +5,7 @@ import CreateGroup from '../components/modals/CreateGroup'
 import SpecBar from '../components/SpecBar'
 import { observer } from 'mobx-react-lite'
 
-const AdminGroup = observer(() => {
+const AdminGroup = () => {
   const [groupVisible, setGroupVisible] = useState(false)
   return (
     <Row>
@@ -31,6 +31,6 @@ const AdminGroup = observer(() => {
       </Col>
     </Row>
   )
-})
+}
 
 export default AdminGroup

@@ -4,7 +4,7 @@ import SpecTable from '../components/tables/SpecTable'
 import CreateSpec from '../components/modals/CreateSpec'
 import { observer } from 'mobx-react-lite'
 
-const AdminSpec = observer(() => {
+const AdminSpec = () => {
   const [specVisible, setSpecVisible] = useState(false)
   return (
     <Row>
@@ -27,6 +27,6 @@ const AdminSpec = observer(() => {
       </Col>
     </Row>
   )
-})
+}
 
 export default AdminSpec

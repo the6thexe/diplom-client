@@ -4,7 +4,7 @@ import MarkTable from '../components/tables/MarkTable'
 import CreateTeacher from '../components/modals/CreateTeacher'
 import { observer } from 'mobx-react-lite'
 
-const AdminTeacher = observer(() => {
+const AdminTeacher = () => {
   const [teacherVisible, setTeacherVisible] = useState(false)
   return (
     <Row>
@@ -17,6 +17,6 @@ const AdminTeacher = observer(() => {
       </Col>
     </Row>
   )
-})
+}
 
 export default AdminTeacher

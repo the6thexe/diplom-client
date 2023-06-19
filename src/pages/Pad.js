@@ -9,7 +9,7 @@ import { Button, Input, Space } from 'antd'
 import { observer } from 'mobx-react-lite'
 import { DatePicker } from 'antd'
 
-const Pad = observer(() => {
+const Pad = () => {
   const { student } = useContext(Context)
   useEffect(() => {
     fetchGroups().then(data => student.setGroups(data))
@@ -43,6 +43,6 @@ const Pad = observer(() => {
       </Row>
     </Container>
   )
-})
+}
 
 export default Pad

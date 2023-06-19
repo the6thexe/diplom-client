@@ -6,7 +6,7 @@ import { fetchSpecs, fetchStudents, fetchGroups } from '../http/padAPI'
 import Carusel from '../components/Carusel'
 import StudentTable from '../components/tables/StudentTable' 
 
-const Shop = observer(() => {
+const Shop = () => {
   const { student } = useContext(Context)
 
   useEffect(() => {
@@ -21,6 +21,6 @@ const Shop = observer(() => {
       <Carusel/>
     </Container>
   )
-})
+}
 
 export default Shop
