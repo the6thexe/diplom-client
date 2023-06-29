@@ -18,7 +18,6 @@ const StudentPage = observer(() => {
       const studentInfo = await fetchOneStudent(id);
 
       const groupInfo = await fetchOneGroup(studentInfo.groupId)
-      console.log(groupInfo)
       const specInfo = await fetchOneSpec(groupInfo.specId)
       const marks = await getAllStudentMarks(studentInfo.id)
 
@@ -32,7 +31,6 @@ const StudentPage = observer(() => {
             marks: [mark]
           })
         } else {
-          console.log(discipline)
           discipline.marks.push(mark);
         }
       });
@@ -49,6 +47,8 @@ const StudentPage = observer(() => {
 
   }, [])
 
+  const totalMarks = disciplines.flatMap((discipline) => discipline.marks);
+  const averageMark = totalMarks.reduce((acc, cur) => acc + cur.mark, 0) / totalMarks.length;
 
   return (
     <Container className="mt-3">
@@ -65,7 +65,10 @@ const StudentPage = observer(() => {
                 <h3 style={{ textAlign: 'center', width: '100%', marginTop: '10px' }}>{student.name}</h3>
                 <hr></hr>
                 <Col>
-
+                  <h6>Номер зачетки:</h6>
+                  {
+                    student.id
+                  }
                   <h6>Группа:</h6>
                   {
                     group.groupId
@@ -81,24 +84,46 @@ const StudentPage = observer(() => {
             </Row>
             <hr></hr>
             <Row>
-              {/* <Col style={{ marginRight: '37px', marginLeft: '37px', backgroundColor: 'rgb(172, 149, 189)', borderRadius: '25px', marginTop: '10px' }}>
+              <Col style={{ marginRight: '37px', marginLeft: '37px', backgroundColor: 'rgb(172, 149, 189)', borderRadius: '25px', marginTop: '10px' }}>
                 <h5 style={{ marginTop: '10px' }}>
-                  Посещаемость:
+                  Итоговый балл:
                 </h5>
                 <hr></hr>
-              </Col> */}
-              <Col style={{ marginRight: '20px',marginLeft: "20px", backgroundColor: 'rgb(172, 149, 189)', borderRadius: '25px', marginTop: '10px' }}>
-                <h5 style={{ marginTop: '10px' }}>
-                  Средний балл:
-                </h5>
-                <hr></hr>
+                <div style={{ overflowY: 'auto' }}>
                 {disciplines.map((discipline) => {
-                  return (
-                    <div>
-                      <p>{discipline.name} : {discipline.marks.reduce((acc, cur) => acc + cur.mark, 0) / discipline.marks.length}</p>
-                    </div>
-                  )
-                })}
+                    const filteredMarks = discipline.marks.filter((mark) => mark.info === "Сем" || mark.info === "ОКР");
+                    if(filteredMarks.length>0){
+                      const averageMark = filteredMarks.reduce((acc, cur) => acc + cur.mark, 0) / filteredMarks.length;
+                      return (
+                        <div>
+                          <p>{discipline.name} : {averageMark}</p>
+                        </div>
+                      )    
+                    }
+                  })}
+                </div>
+              </Col>
+              <Col style={{ marginRight: '20px', marginLeft: "20px", backgroundColor: 'rgb(172, 149, 189)', borderRadius: '25px', marginTop: '10px' }}>
+                <h5 style={{ marginTop: '10px' }}>
+                  Средний балл: {averageMark.toFixed(1)}
+                </h5>
+                <hr></hr>
+                <div style={{ overflowY: 'auto' }}>
+                  {
+                  
+                  disciplines.map((discipline) => {
+                    return (
+                      <div>
+                        <p>{discipline.name} : {
+                          (discipline.marks.reduce((acc, cur) => acc + cur.mark, 0) / discipline.marks.length).toFixed(1) || "-"
+                        }</p>
+                      </div>
+                    )
+                  })
+                  
+                  
+                  }
+                </div>
               </Col>
             </Row>
             <hr></hr>

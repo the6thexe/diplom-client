@@ -1,54 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Container, Col, Image, Row, Form, Card, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
-import { fetchDisciplines, fetchGroups, fetchOneGroup, fetchOneSpec, fetchOneStudent, getAllStudentMarks } from '../http/padAPI'
+import { fetchDisciplines, fetchGroups, fetchOneGroup, fetchOneSpec, fetchOneStudent, fetchOneTeacher, fetchStudents, getAllStudentMarks, getAllTeacherDisciplines } from '../http/padAPI'
 import { observer } from 'mobx-react-lite'
 import { Context } from '../index'
 
 
-const StudentPage = observer(() => {
-  const [student, setStudent] = useState({ info: [] });
-  const [group, setGroups] = useState({ info: [] });
-  const [spec, setSpecs] = useState({ info: [] });
-  const [disciplines, setDisciplines] = useState([]);
+const TeacherPage = /*observer(*/() => {
+  const [teacher, setTeacher] = useState({ info: [] });
+  const [disciplines, setDisciplines] = useState([])
+  const [students, setStudents] = useState([])
   const { id } = useParams()
 
   useEffect(() => {
     async function fetchData() {
-      const studentInfo = await fetchOneStudent(id);
+      const teacherInfo = await fetchOneTeacher(id);
+      const disciplines = await getAllTeacherDisciplines(id)
+      const students = await fetchStudents()
 
-      const groupInfo = await fetchOneGroup(studentInfo.groupId)
-      console.log(groupInfo)
-      const specInfo = await fetchOneSpec(groupInfo.specId)
-      const marks = await getAllStudentMarks(studentInfo.id)
 
-      const disciplinesData = [];
-      marks.forEach(mark => {
-        const discipline = disciplinesData.find((discipline) => discipline.name === mark.discipline.name)
-        if (!discipline) {
-          disciplinesData.push({
-            name: mark.discipline.name,
-            disciplineSource: mark.discipline,
-            marks: [mark]
-          })
-        } else {
-          console.log(discipline)
-          discipline.marks.push(mark);
-        }
-      });
-      console.log(disciplinesData);
-      setStudent(studentInfo)
-      setGroups(groupInfo)
-      setDisciplines(disciplinesData)
-      setSpecs(specInfo)
-      console.log(disciplinesData[0].marks.reduce((acc, cur) => acc + cur.mark, 0))
 
+
+
+      setDisciplines(disciplines)
+      setTeacher(teacherInfo)
     }
-
     fetchData()
 
   }, [])
-
 
   return (
     <Container className="mt-3">
@@ -62,19 +41,19 @@ const StudentPage = observer(() => {
               <h4 style={{ marginTop: '10px' }}>Статистика преподавателя:</h4>
               <hr></hr>
               <Container style={{ width: '90%', backgroundColor: 'rgb(172, 149, 189)', borderRadius: '25px' }}>
-                <h3 style={{ textAlign: 'center', width: '100%', marginTop: '10px' }}>{student.name}</h3>
+                <h3 style={{ textAlign: 'center', width: '100%', marginTop: '10px' }}>{teacher.name}</h3>
                 <hr></hr>
                 <Col>
 
-                  <h6>Группа:</h6>
+                  <h6>Логин:</h6>
                   {
-                    group.groupId
+                    teacher.login
                   }
                 </Col>
                 <Col style={{ marginBottom: '20px' }}>
-                  <h6>Специальность:</h6>
+                  <h6>Пароль:</h6>
                   {
-                    spec.name
+                    teacher.password
                   }
                 </Col>
               </Container>
@@ -83,23 +62,32 @@ const StudentPage = observer(() => {
             <Row>
               <Col style={{ marginRight: '37px', marginLeft: '37px', backgroundColor: 'rgb(172, 149, 189)', borderRadius: '25px', marginTop: '10px' }}>
                 <h5 style={{ marginTop: '10px' }}>
-                  Посещаемость:
-                </h5>
-                <hr></hr>
-              </Col>
-              <Col style={{ marginRight: '37px', backgroundColor: 'rgb(172, 149, 189)', borderRadius: '25px', marginTop: '10px' }}>
-                <h5 style={{ marginTop: '10px' }}>
-                  Средний балл:
+                  Предметы:
                 </h5>
                 <hr></hr>
                 {disciplines.map((discipline) => {
+                  console.log(discipline)
                   return (
                     <div>
-                      <p>{discipline.name} : {discipline.marks.reduce((acc, cur) => acc + cur.mark, 0) / discipline.marks.length}</p>
+                      <p>{discipline.name} у группы {discipline.group.groupId}</p>
                     </div>
                   )
                 })}
               </Col>
+              {/* <Col style={{ marginRight: '37px', marginLeft: '37px', backgroundColor: 'rgb(172, 149, 189)', borderRadius: '25px', marginTop: '10px' }}>
+                <h5 style={{ marginTop: '10px' }}>
+                  Средняя успеваемость по предметам:
+                </h5>
+                <hr></hr>
+                {disciplines.map((discipline) => {
+                  console.log(discipline)
+                  return (
+                    <div>
+                      <p>{discipline.name} у группы {discipline.group.groupId} : </p>
+                    </div>
+                  )
+                })}
+              </Col> */}
             </Row>
             <hr></hr>
           </Container>
@@ -107,6 +95,6 @@ const StudentPage = observer(() => {
       </Row>
     </Container>
   )
-})
+}/*)*/
 
-export default StudentPage
+export default TeacherPage

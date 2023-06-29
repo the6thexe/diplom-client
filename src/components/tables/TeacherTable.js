@@ -3,9 +3,11 @@ import { useContext, useEffect, useState } from 'react';
 import { Context } from '../../index'
 import { deleteOneStudent, deleteOneTeacher, fetchDisciplines, fetchGroups, fetchStudents, fetchTeachers } from '../../http/padAPI';
 import { observer } from 'mobx-react-lite';
+import { TEACHER_ROUTE } from '../../utils/consts';
+import { useNavigate } from 'react-router-dom';
 
 
-const columns = (handleIconClick) => [
+const columns = (handleIconClick, routing) => [
     {
         title: 'Номер преподавателя',
         dataIndex: 'id',
@@ -16,7 +18,9 @@ const columns = (handleIconClick) => [
         title: 'ФИО',
         dataIndex: 'name',
         key: 'name',
-        render: (text) => <a >{text}</a>,
+        render: (text, record) => <a 
+        onClick={() => routing(record.id)}
+        >{text}</a>,
     },
     /*{
         title: 'Логин для входа',
@@ -47,10 +51,16 @@ const columns = (handleIconClick) => [
 
 const TeacherTable = observer(() => {
     const [data, setData] = useState([]);
+    const history = new useNavigate()
 
     const handleIconClick = async (record) => {
         await deleteOneTeacher(record)
     };
+
+    const routing = (id) => {
+        console.log(id)
+        history(TEACHER_ROUTE + "/" + id)
+    }
 
     const { student } = new useContext(Context)
     useEffect(() => {
@@ -72,7 +82,7 @@ const TeacherTable = observer(() => {
     }, [student.teachers]);
 
     return <>
-        <Table columns={columns(handleIconClick)} dataSource={data} />
+        <Table columns={columns(handleIconClick, routing)} dataSource={data} />
     </>
 })
 

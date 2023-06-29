@@ -12,6 +12,11 @@ import { STUDENT_ROUTE } from '../utils/consts';
 const columns = (handleInputChange, routing, handleIconClick) => [
     {
         title: 'Номер',
+        dataIndex: 'num',
+        key: 'num',
+    },
+    {
+        title: 'Номер зачетки',
         dataIndex: 'id',
         key: 'id',
     },
@@ -20,9 +25,9 @@ const columns = (handleInputChange, routing, handleIconClick) => [
         dataIndex: 'name',
         key: 'name',
         render: (text, record) => <a
-         onClick={() => routing(record.id)}
-         >{text}</a>,
-         onFilter: (text, record) => record.name.indexOf(text) === 0,
+            onClick={() => routing(record.id)}
+        >{text}</a>,
+        onFilter: (text, record) => record.name.indexOf(text) === 0,
         sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
@@ -63,7 +68,7 @@ const columns = (handleInputChange, routing, handleIconClick) => [
         key: 'actions',
         render: (_, record) => (
             <Button
-                style={{ borderBlockColor: 'red', backgroundColor: "white", color: 'black'}}
+                style={{ borderBlockColor: 'red', backgroundColor: "white", color: 'black' }}
                 onClick={() => handleIconClick(record.id)}
             >
                 Сохранить
@@ -76,7 +81,7 @@ const Journal = observer(() => {
     const rec = false;
     const [data, setData] = useState([]);
     const history = new useNavigate()
-    
+
     const routing = (id) => {
         history(STUDENT_ROUTE + "/" + id)
     }
@@ -104,14 +109,14 @@ const Journal = observer(() => {
     }
 
     const handleInputChange = (value, id) => {
-        
+
         student.setSelectedId(id)
-        
-        if(parseInt(value)){
+
+        if (parseInt(value)) {
             student.setSelectedMark(value)
         } else {
             student.setSelectedInfo(value)
-            
+
         }
 
         console.log(student.selectedMark, "mark")
@@ -121,23 +126,25 @@ const Journal = observer(() => {
         console.log(student.selectedDiscipline.id, "disc")
     };
 
-    
+
     const recordIn = () => {
-        if(student.selectedMark != null & student.selectedDate != null & student.selectedInfo != null & student.selectedId != null & student.selectedDiscipline.id != null){
+        if (student.selectedMark != null & student.selectedDate != null & student.selectedInfo != null & student.selectedId != null & student.selectedDiscipline.id != null) {
             addMark()
-        }else{
+        } else {
             return alert('Данные не заполнены')
         }
     }
-    
+
 
     return <>
         <Table columns={columns(handleInputChange, routing, handleIconClick)} dataSource=
             {
                 student.students.filter((students) => students.groupId === student.selectedGroup.id)
+                    .sort((a, b) => a.name.localeCompare(b.name))
                     .map((student, index) => {
                         return {
                             key: index,
+                            num: index+1,
                             id: student.id,
                             name: student.name,
                             editable: true

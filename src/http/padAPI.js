@@ -130,3 +130,8 @@ export const getAllStudentMarks = async (studedntId) => {
     const { data } = await $host.get('api/mark//studentMarks/' + studedntId)
     return data
 }
+
+export const getAllTeacherDisciplines = async (teacherId) => {
+    const { data } = await $host.get('api/discipline//teacherDisciplines/' + teacherId)
+    return data
+}
